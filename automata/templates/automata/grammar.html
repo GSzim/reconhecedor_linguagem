@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4><i class="fa-solid fa-pen-ruler"></i> Grammar Definition</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary mt-3">
+                            <i class="fa-solid fa-gear"></i> Create Grammar
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            {% if grammar_valid %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4><i class="fa-solid fa-circle-info"></i> Grammar Information</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>Type:</strong> {{ grammar_type }}</p>
+                    <p><strong>Automaton Type:</strong> {{ automaton_type }}</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fa-solid fa-vial"></i> Test Word</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'test_word' %}">
+                        {% csrf_token %}
+                        {{ test_form|crispy }}
+                        <button type="submit" class="btn btn-success mt-3">
+                            <i class="fa-solid fa-play"></i> Test Word
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-6">
+            {% if grammar_valid and graph_image %}
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fa-solid fa-diagram-project"></i> Automaton Visualization</h4>
+                </div>
+                <div class="card-body text-center">
+                    <img src="{{ graph_image }}" alt="Automaton Graph" class="automaton-graph">
+                    
+                    {% if word_test_result %}
+                    <div class="mt-4 alert alert-{% if word_accepted %}success{% else %}danger{% endif %}">
+                        <h5>
+                            <i class="fa-solid fa-{% if word_accepted %}circle-check{% else %}circle-xmark{% endif %}"></i>
+                            The word "{{ test_word }}" was 
+                            {% if word_accepted %}accepted{% else %}rejected{% endif %}!
+                        </h5>
+                        <p class="mb-0">Execution time: {{ execution_time|floatformat:4 }} seconds</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
