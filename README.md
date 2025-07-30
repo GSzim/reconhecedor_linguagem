@@ -2,7 +2,17 @@
 
 <img width="682" height="931" alt="Recognizer" src="https://github.com/user-attachments/assets/67262c3e-b125-4426-850f-81a6dc5bd51d" />
 
+
+https://github.com/user-attachments/assets/dd299a6b-bf55-4117-9258-562e68d75810
+
+
 <img width="663" height="941" alt="Recognizer2" src="https://github.com/user-attachments/assets/96b7fa85-6654-4b42-bb19-a18ff9e5ff0c" />
+
+
+https://github.com/user-attachments/assets/e3bef90a-488e-423f-a397-be20bd76160c
+
+
+
 
 Sistema para reconhecimento de linguagens regulares com interface web, desenvolvido em Django.
 
